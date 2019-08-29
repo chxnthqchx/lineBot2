@@ -20,7 +20,9 @@ def callback():
     json_line = request.get_json()
     json_line = json.dumps(json_line)
     decoded = json.loads(json_line)
-    user = decoded['originalDetectlntenRequest']['payload']['data']['replyToken']
+    #user = decoded['originalDetectlntenRequest']['payload']['data']['replyToken']
+    user = decoded['originalDetectIntentRequest']['payload']['data']['replyToken']
+    #userText = decoded['queryResult']['intent']['displayName']
     userText = decoded['queryResult']['intent']['displayName']
     sendText(user,userText)
     if (userText == 'กินข้าวหรือยัง') :
@@ -29,8 +31,7 @@ def callback():
        sendText(user, 'ไปคนับ')
     else :
        sendText(user,'พิมรายมาอ๊าา')
-  
-    return '',200
+  return '',200
 
 def sendText(user, text):
   LINE_API = 'https://api.line.me/v2/bot/message/reply'
